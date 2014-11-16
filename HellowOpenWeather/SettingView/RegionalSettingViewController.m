@@ -69,8 +69,7 @@
     [userDefaultsCityName synchronize];
     
     appDelegate.delegateCityName = getCityName.text;
-   
-    NSLog(@"stringCityName : %@",self.getCityName.text);
+
 }
 
 - (IBAction)inputTime:(id)sender {

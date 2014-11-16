@@ -97,7 +97,6 @@
     [Konashi pinMode:LED2 mode:OUTPUT];
     [Konashi pinMode:PIO2 mode:OUTPUT];
     [self rssiTimerCall];
-    NSLog(@"ready");
 }
 
 - (void)connected {
@@ -130,7 +129,6 @@
 - (void) strength {
     _konashiRSSI.text = [NSString stringWithFormat:@"%d", [Konashi signalStrengthRead]];
     _rssi = [Konashi signalStrengthRead];
-    NSLog(@"READ_STRENGTH: %d", self.rssi);
     [self requestWeatherData];
 }
 
@@ -210,11 +208,9 @@
                 int i = 0;
                 
                 for (NSDictionary *listNum in dataList) {
-                    
-//                    NSLog(@"Counter                : %d", i);
+    
                     
                     dataDTtxtArr[i] = [listNum objectForKey:@"dt_txt"];
-//                    NSLog(@"Data receiving time Arr: %@", dataDTtxtArr[i]);
                     
                     
                     NSDictionary *dataWeather = [listNum objectForKey:@"weather"];
@@ -223,46 +219,32 @@
                         
                         weatherConditionArr[i] = [weatherNum objectForKey:@"main"];
                         
-                        if(_rainDebug){
+                        if(self.rainFlag){
                             weatherConditionArr[i] = @"Rain";
                         }
-                        
-//                        NSLog(@"Weather condition Arr  : %@", weatherConditionArr[i]);
-                        
-                        NSString *weatherDescription = [weatherNum objectForKey:@"description"];
-//                        NSLog(@"Weather description    : %@", weatherDescription);
-                        
                     }
                     
-                    NSDictionary *dataRain = [listNum objectForKey:@"rain"];
-                    NSNumber *precipitationRain = [dataRain objectForKey:@"3h"];
-//                    NSLog(@"Precipitation volume   : %@ mm", precipitationRain);
-                    
- 
-                    
-                    if ([weatherConditionArr[i]  isEqual: @"Rain"] && [dataDTtxtArr[i] isEqualToString: getRequestTime]){
-                        _weatherIcon.image = [UIImage imageNamed: @"bg_wether_rainy.png"];   // 雨アイコンの表示
-                        _rainFlag = true;
-                        NSLog(@"rain!!");
-                    }
-                    else if(![weatherConditionArr[i]  isEqual: @"Rain"] && [dataDTtxtArr[i] isEqualToString: getRequestTime]){
-                        _weatherIcon.image = [UIImage imageNamed: @"bg_wether_sunny.png"];    // 晴れアイコンの表示
-                        _rainFlag = false;
-                    }
+                    if ([weatherConditionArr[i]  isEqual: @"Rain"] && [dataDTtxtArr[i] isEqualToString: getRequestTime])
+                        self.rainFlag = true;
+                    else if(![weatherConditionArr[i]  isEqual: @"Rain"] && [dataDTtxtArr[i] isEqualToString: getRequestTime])
+                        self.rainFlag = false;
                     
                     i++;
                 }
                 
-                
-                if (self.rainFlag) {
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-                    [self blinkTimerCall];
-                }
-                else if(!self.rainFlag){
-                    [self blinkTimerCall];
-                }
-                
             }];
+        
+            
+            if (self.rainFlag) {
+                _weatherIcon.image = [UIImage imageNamed: @"bg_wether_rainy.png"];   // 雨アイコンの表示
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                [self blinkTimerCall];
+            }
+            else {
+                _weatherIcon.image = [UIImage imageNamed: @"bg_wether_sunny.png"];    // 晴れアイコンの表示
+                [self blinkTimerCall];
+            }
+            
             _weatherRequestFlag = true;
             
         }
@@ -272,7 +254,7 @@
     else if(_rssi < -FAR_THRESHOLD){
         
         if (_weatherRequestFlag) {
-            if (_rainFlag) {
+            if (self.rainFlag) {
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                 [_blinkTimer invalidate];
                 _blinkTimer = nil;
@@ -303,8 +285,8 @@
 }
 
 - (IBAction)debugButton:(id)sender{
-    _rainDebug = !_rainDebug;
-    if(_rainDebug)
+    self.rainFlag = !self.rainFlag;
+    if(self.rainFlag)
         self.konashiRSSI.textColor = [UIColor lightGrayColor];
     else
         self.konashiRSSI.textColor = [UIColor whiteColor];
@@ -366,7 +348,6 @@
 }
 
 - (void)findKonashiTimerLoop:(NSTimer*)timer {
-    NSLog(@"Find... %@",_myKonashi);
     [Konashi findWithName: _myKonashi];
 }
 

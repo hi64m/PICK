@@ -68,8 +68,7 @@
 
 
 - (void)ready {
-    [Konashi pinMode:PIO4 mode:OUTPUT];
-    [Konashi digitalWrite:PIO5 value:HIGH];
+
 }
 
 
@@ -86,12 +85,10 @@
     [userMyKonashi setObject:inMyKonashiName forKey:@"MY_KONASHI"];
     [userMyKonashi synchronize];
     
-    NSLog(@"connected : %@" , [Konashi peripheralName]);
-    
 }
 
 - (void)disconnected {
-    NSLog(@"disconnected");
+
 
 }
 

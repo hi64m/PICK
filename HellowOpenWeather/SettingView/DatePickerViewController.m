@@ -92,10 +92,6 @@
     // AppDelegateにTimePickerを渡す
     appDelegate.delegateTimePicker = _timePicker;
     
-
-    
-    NSLog(@"stringTime : %@", _timePicker);
-    
 }
 
 /*
