@@ -451,6 +451,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Satoshi Hirazawa";
 				TargetAttributes = {
+					3B511B0719D11920003095F9 = {
+						DevelopmentTeam = 73ZFTMLA7Z;
+					};
 					3B511B2819D11920003095F9 = {
 						TestTargetID = 3B511B0719D11920003095F9;
 					};

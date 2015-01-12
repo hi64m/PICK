@@ -242,6 +242,7 @@
             }
             else {
                 _weatherIcon.image = [UIImage imageNamed: @"bg_wether_sunny.png"];    // 晴れアイコンの表示
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                 [self blinkTimerCall];
             }
             
@@ -255,13 +256,13 @@
         
         if (_weatherRequestFlag) {
             if (self.rainFlag) {
-                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                 [_blinkTimer invalidate];
                 _blinkTimer = nil;
                 [Konashi digitalWrite:LED2 value:LOW];
                 [Konashi digitalWrite:PIO2 value:LOW];
                 
             }
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             _weatherRequestFlag = false;
         }
     }

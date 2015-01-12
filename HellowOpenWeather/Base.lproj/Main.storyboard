@@ -100,12 +100,22 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2Ru-hJ-oE3">
                                 <rect key="frame" x="0.0" y="64" width="320" height="454"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEr-rp-kJ3">
+                                <rect key="frame" x="263" y="79" width="31" height="30"/>
+                                <state key="normal" title="map">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="test:" destination="miX-IN-h83" eventType="touchUpInside" id="cCe-zb-gmh"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Location" image="icon_tab_pin.png" id="ZPj-wt-Os0"/>
                     <navigationItem key="navigationItem" id="d8E-F0-JIv"/>
                     <connections>
+                        <outlet property="buttons" destination="yEr-rp-kJ3" id="P5M-HQ-Xgs"/>
+                        <outlet property="myMap" destination="2Ru-hJ-oE3" id="OL4-RQ-MG8"/>
                         <outlet property="navBar" destination="QWJ-dL-JHH" id="R9W-8f-h1O"/>
                     </connections>
                 </viewController>
@@ -148,7 +158,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9fn-x1-WtU">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="E7130058-6E08-497F-B17A-B019C183CEB1" id="kHV-fJ-YN1">
+                                <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4FE38B3A-2158-4C83-BD5D-DD8188FD2A3A" id="kHV-fJ-YN1">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -426,7 +436,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="E7130058-6E08-497F-B17A-B019C183CEB1" width="320" height="452">
+        <image name="4FE38B3A-2158-4C83-BD5D-DD8188FD2A3A" width="320" height="452">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
